@@ -1,0 +1,140 @@
+/* ==== MODERN UI - PASTEL PURPLE STATIONERY EDITION ==== */
+
+:root {
+    --primary-color: #B288FF;      /* Lavender Pastel */
+    --primary-light: #F0E6FF;     /* Super Light Purple */
+    --primary-deep: #9254FF;      /* Active Purple */
+    --secondary-color: #FF8BA0;    /* Pastel Pink for badges */
+    --text-main: #4A4A4A;          /* Softer text */
+    --text-muted: #8E8E8E;
+    --bg-ground: #F9F7FF;          /* Hint of purple in bg */
+    
+    --hover-transform: translateY(-10px) scale(1.02);
+    --card-shadow: 0 10px 30px rgba(178, 136, 255, 0.08);
+    --card-shadow-hover: 0 20px 50px rgba(178, 136, 255, 0.2);
+    --border-radius-lg: 24px;      /* Friendlier round corners */
+    --border-radius-sm: 14px;
+}
+
+body {
+    background-color: var(--bg-ground);
+    color: var(--text-main);
+}
+
+/* 2. Header & Navigation */
+.section-header {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.search-header {
+    border-radius: 12px;
+    border: 2px solid #edf2f7;
+    background: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.search-header:focus-within {
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 91, 170, 0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-deep));
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    letter-spacing: -0.01em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 10px 25px rgba(178, 136, 255, 0.3);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #be99ff, #9c6bff);
+}
+
+/* 3. Modern Product Cards */
+.card-product-grid {
+    border: 1px solid rgba(0,0,0,0.03);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: #fff;
+    position: relative;
+}
+
+.card-product-grid:hover {
+    transform: var(--hover-transform);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(178, 136, 255, 0.15);
+}
+
+.card-product-grid .img-wrap {
+    padding: 20px;
+    height: 240px;
+    background: #fff;
+}
+
+.card-product-grid:hover .img-wrap img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.card-product-grid .info-wrap {
+    padding: 20px;
+    border-top: 1px solid #f7fafc;
+}
+
+.card-product-grid .title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #2d3748;
+    margin-bottom: 12px;
+}
+
+.price-wrap .price {
+    color: var(--secondary-color);
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* 4. Enhancement Helpers */
+.glass-badge {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a202c;
+    position: relative;
+    padding-left: 15px;
+}
+
+/* 5. Animations for Stationery Store */
+@keyframes ken-burns {
+    0% { transform: scale(1) translateX(0); }
+    100% { transform: scale(1.1) translateX(-20px); }
+}
+
+.animate-ken-burns {
+    animation: ken-burns 15s ease-in-out infinite alternate;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 24px;
+    background: var(--primary-color);
+    border-radius: 3px;
+}
