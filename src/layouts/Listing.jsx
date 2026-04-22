@@ -257,9 +257,11 @@ const Listing = () => {
                             {loading ? (
                                 <div className="text-muted">Đang tải danh sách...</div>
                             ) : (
-                                filteredProducts.map((p) => (
-                                    <ProductItem key={p.productId} product={p} viewMode={viewMode} />
-                                ))
+                                <div className={viewMode === "grid" ? "row" : ""}>
+                                    {filteredProducts.map((p) => (
+                                        <ProductItem key={p.productId} product={p} viewMode={viewMode} />
+                                    ))}
+                                </div>
                             )}
 
                             {/* PAGINATION */}

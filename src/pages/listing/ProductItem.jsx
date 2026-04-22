@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
-import { star, checkmarkCircleOutline } from "ionicons/icons";
+import { star } from "ionicons/icons";
 import { GET_IMG } from "../../config/apiService";
+import HomeProductCard from "../home/HomeProductCard";
 
 const ProductItem = ({ product, viewMode = "grid" }) => {
     const imgField = product?.image;
@@ -19,40 +20,7 @@ const ProductItem = ({ product, viewMode = "grid" }) => {
     if (viewMode === "grid") {
         return (
             <div className="col-6 col-md-4 col-lg-3 mb-4">
-                <article className="card h-100 shadow-sm border-0 rounded-xl overflow-hidden hover-shadow transition-all">
-                    <div className="position-relative">
-                        {discount ? (
-                            <span className="badge badge-danger position-absolute" style={{ top: 10, left: 10, zIndex: 1 }}>
-                                -{discount}%
-                            </span>
-                        ) : null}
-                        <Link to={`/product-detail/${product.productId}`} className="d-block bg-light p-3">
-                            <div className="img-wrap d-flex align-items-center justify-content-center" style={{ height: "150px" }}>
-                                <img
-                                    src={imgUrl || require("../../asset/images/items/1.jpg")}
-                                    alt={product.productName}
-                                    className="max-h-100 max-w-100 object-contain"
-                                    onError={(e) => { e.currentTarget.src = require("../../asset/images/items/1.jpg"); }}
-                                />
-                            </div>
-                        </Link>
-                    </div>
-                    <div className="card-body p-3 d-flex flex-column">
-                        <Link to={`/product-detail/${product.productId}`} className="h6 text-dark font-weight-bold mb-2 text-truncate-2" style={{ height: "40px", overflow: "hidden" }}>
-                            {product.productName}
-                        </Link>
-                        <div className="mt-auto">
-                            {special ? (
-                                <div className="d-flex flex-column">
-                                    <span className="text-primary font-weight-bold">{formatVND(special)}</span>
-                                    <small className="text-muted text-decoration-line-through">{formatVND(price)}</small>
-                                </div>
-                            ) : (
-                                <span className="text-primary font-weight-bold">{formatVND(price)}</span>
-                            )}
-                        </div>
-                    </div>
-                </article>
+                <HomeProductCard product={product} />
             </div>
         );
     }

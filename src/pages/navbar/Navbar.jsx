@@ -5,7 +5,7 @@ import { menuOutline } from "ionicons/icons";
 
 const Navbar = ({ toggleMenu, isMenuOpen, categories = [] }) => {
     return (
-        <nav className="navbar navbar-main navbar-expand-lg navbar-light py-0 shadow-sm" style={{ backgroundColor: '#f9f5ff', minHeight: '45px' }}>
+        <nav className="navbar navbar-main navbar-expand-lg navbar-light py-0 border-bottom" style={{ backgroundColor: '#ffffff', minHeight: '50px' }}>
             <div className="container">
                 {/* Mobile Menu Toggle Button */}
                 <button
@@ -13,20 +13,20 @@ const Navbar = ({ toggleMenu, isMenuOpen, categories = [] }) => {
                     type="button"
                     onClick={toggleMenu}
                 >
-                    <IonIcon icon={menuOutline} style={{ fontSize: "1.5rem", color: '#7c3aed' }} />
+                    <IonIcon icon={menuOutline} style={{ fontSize: "1.5rem", color: '#222222' }} />
                 </button>
 
                 {/* Main Nav Content - Always show on lg, collapse on mobile */}
                 <div className={`navbar-collapse ${isMenuOpen ? "d-block" : "d-none d-lg-flex"}`} id="main_nav">
                     <ul className="navbar-nav align-items-center w-100">
                         <li className="nav-item">
-                            <Link className="nav-link px-3 font-weight-bold text-dark hover-purple py-2 mb-0" to="/">
-                                Trang chủ
+                            <Link className="nav-link px-3 font-weight-bold py-3 mb-0 hover-leo text-uppercase" to="/">
+                                Home
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link px-3 font-weight-bold text-dark hover-purple py-2 mb-0 border-right" to="/listing">
-                                Sản phẩm
+                            <Link className="nav-link px-3 font-weight-bold py-3 mb-0 hover-leo text-uppercase" to="/listing">
+                                Shop
                             </Link>
                         </li>
 
@@ -35,9 +35,9 @@ const Navbar = ({ toggleMenu, isMenuOpen, categories = [] }) => {
                             categories.map((c) => (
                                 <li className="nav-item" key={c.categoryId}>
                                     <Link
-                                        className="nav-link px-3 text-secondary font-medium transition-all hover-translate py-2 mb-0"
+                                        className="nav-link px-3 py-3 mb-0 hover-leo font-weight-bold text-uppercase"
                                         to={`/category/${c.categoryId}`}
-                                        style={{ fontSize: '0.9rem' }}
+                                        style={{ fontSize: '0.85rem' }}
                                     >
                                         {c.categoryName}
                                     </Link>
@@ -45,7 +45,7 @@ const Navbar = ({ toggleMenu, isMenuOpen, categories = [] }) => {
                             ))
                         ) : (
                             <li className="nav-item">
-                                <span className="nav-link text-muted small px-3 py-2 mb-0">Đang tải danh mục...</span>
+                                <span className="nav-link text-muted small px-3 py-3 mb-0">Đang tải danh mục...</span>
                             </li>
                         )}
                     </ul>
@@ -53,21 +53,12 @@ const Navbar = ({ toggleMenu, isMenuOpen, categories = [] }) => {
             </div>
 
             <style dangerouslySetInnerHTML={{ __html: `
-                .hover-purple:hover { color: #8b5cf6 !important; }
-                .hover-translate:hover { 
-                    color: #7c3aed !important; 
-                    transform: translateY(-2px);
-                }
-                .transition-all { transition: all 0.2s ease; }
-                .font-medium { font-weight: 500 !important; }
-                .nav-link { color: #4b5563 !important; }
+                .hover-leo { color: #222222 !important; transition: all 0.3s ease; }
+                .hover-leo:hover { color: #e97081 !important; }
+                .nav-link { color: #222222 !important; letter-spacing: 0.5px; }
                 @media (max-width: 991.98px) {
                     .navbar-nav { padding: 1rem 0; }
-                    .border-right { border-right: none !important; }
                     .navbar-collapse.d-block { display: block !important; }
-                }
-                @media (min-width: 992px) {
-                    .border-right { border-right: 1px solid #e5e7eb !important; }
                 }
             `}} />
         </nav>
