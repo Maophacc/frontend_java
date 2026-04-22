@@ -85,10 +85,10 @@ const ProductContent = ({ product, quantity, setQuantity }) => {
                             <article className="gallery-wrap p-3">
                                 <div className="img-big-wrap text-center mb-3">
                                     <div
-                                        className="d-flex align-items-center justify-content-center"
-                                        style={{ height: 450, background: "#f8f9fa", borderRadius: 8 }}
+                                        className="d-flex align-items-center justify-content-center bg-light rounded"
+                                        style={{ height: "auto", minHeight: "300px", maxHeight: "450px" }}
                                     >
-                                        <img src={mainImage} alt="main" style={{ maxHeight: "100%", maxWidth: "100%" }} />
+                                        <img src={mainImage} alt="main" className="img-fluid" style={{ maxHeight: "450px", objectFit: "contain" }} />
                                     </div>
                                 </div>
 

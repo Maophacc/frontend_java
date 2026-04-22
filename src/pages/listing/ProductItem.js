@@ -16,38 +16,77 @@ const ProductItem = ({ product, viewMode = "grid" }) => {
 
     const formatVND = (n) => Number(n ?? 0).toLocaleString("vi-VN") + "đ";
 
-    return (
-        <article className="card card-product-list mb-3 shadow-sm border-0 rounded-lg hover-shadow">
-            <div className="row no-gutters">
-                <aside className="col-md-3">
-                    <Link
-                        to={`/product-detail/${product.productId}`}
-                        className="img-wrap h-100 bg-light rounded-left d-flex align-items-center justify-content-center"
-                    >
+    if (viewMode === "grid") {
+        return (
+            <div className="col-6 col-md-4 col-lg-3 mb-4">
+                <article className="card h-100 shadow-sm border-0 rounded-xl overflow-hidden hover-shadow transition-all">
+                    <div className="position-relative">
                         {discount ? (
-                            <span className="badge badge-danger" style={{ position: "absolute", top: 10, left: 10 }}>
+                            <span className="badge badge-danger position-absolute" style={{ top: 10, left: 10, zIndex: 1 }}>
                                 -{discount}%
                             </span>
                         ) : null}
+                        <Link to={`/product-detail/${product.productId}`} className="d-block bg-light p-3">
+                            <div className="img-wrap d-flex align-items-center justify-content-center" style={{ height: "150px" }}>
+                                <img
+                                    src={imgUrl || require("../../asset/images/items/1.jpg")}
+                                    alt={product.productName}
+                                    className="max-h-100 max-w-100 object-contain"
+                                    onError={(e) => { e.currentTarget.src = require("../../asset/images/items/1.jpg"); }}
+                                />
+                            </div>
+                        </Link>
+                    </div>
+                    <div className="card-body p-3 d-flex flex-column">
+                        <Link to={`/product-detail/${product.productId}`} className="h6 text-dark font-weight-bold mb-2 text-truncate-2" style={{ height: "40px", overflow: "hidden" }}>
+                            {product.productName}
+                        </Link>
+                        <div className="mt-auto">
+                            {special ? (
+                                <div className="d-flex flex-column">
+                                    <span className="text-primary font-weight-bold">{formatVND(special)}</span>
+                                    <small className="text-muted text-decoration-line-through">{formatVND(price)}</small>
+                                </div>
+                            ) : (
+                                <span className="text-primary font-weight-bold">{formatVND(price)}</span>
+                            )}
+                        </div>
+                    </div>
+                </article>
+            </div>
+        );
+    }
 
+    // List View
+    return (
+        <article className="card card-product-list mb-3 shadow-sm border-0 rounded-lg hover-shadow overflow-hidden">
+            <div className="row no-gutters">
+                <aside className="col-4 col-md-3">
+                    <Link
+                        to={`/product-detail/${product.productId}`}
+                        className="img-wrap h-100 bg-light d-flex align-items-center justify-content-center p-3"
+                    >
+                        {discount ? (
+                            <span className="badge badge-danger position-absolute" style={{ top: 10, left: 10 }}>
+                                -{discount}%
+                            </span>
+                        ) : null}
                         <img
                             src={imgUrl || require("../../asset/images/items/1.jpg")}
                             alt={product.productName}
-                            style={{ maxHeight: 180 }}
-                            onError={(e) => {
-                                e.currentTarget.src = require("../../asset/images/items/1.jpg");
-                            }}
+                            style={{ maxHeight: 150 }}
+                            className="img-fluid"
+                            onError={(e) => { e.currentTarget.src = require("../../asset/images/items/1.jpg"); }}
                         />
                     </Link>
                 </aside>
 
-                <div className="col-md-6">
-                    <div className="info-main p-4">
-                        <Link to={`/product-detail/${product.productId}`} className="h5 title text-dark font-weight-bold">
+                <div className="col-8 col-md-6">
+                    <div className="info-main p-3 p-md-4">
+                        <Link to={`/product-detail/${product.productId}`} className="h6 h5-md title text-dark font-weight-bold">
                             {product.productName}
                         </Link>
-
-                        <div className="rating-wrap mb-2 d-flex align-items-center">
+                        <div className="rating-wrap mb-2 d-flex align-items-center small">
                             <ul className="rating-stars list-unstyled d-flex mb-0 mr-2 text-warning">
                                 <li><IonIcon icon={star} /></li>
                                 <li><IonIcon icon={star} /></li>
@@ -55,44 +94,31 @@ const ProductItem = ({ product, viewMode = "grid" }) => {
                                 <li><IonIcon icon={star} /></li>
                                 <li className="text-muted"><IonIcon icon={star} /></li>
                             </ul>
-                            <div className="label-rating text-muted small">4/5</div>
+                            <span className="text-muted">4/5</span>
                         </div>
-
-                        <p className="text-muted">
+                        <p className="text-muted d-none d-md-block small">
                             {product?.description || "Không có mô tả"}
-                        </p>
-
-                        <p className="text-muted small mb-0">
-                            <span className="tag mr-2">
-                                <IonIcon icon={checkmarkCircleOutline} className="text-success" /> Còn {product?.quantity ?? 0}
-                            </span>
-                            {product?.category?.categoryName ? (
-                                <span className="tag">Danh mục: {product.category.categoryName}</span>
-                            ) : null}
                         </p>
                     </div>
                 </div>
 
-                <aside className="col-sm-3 border-left">
-                    <div className="info-aside p-4 h-100 d-flex flex-column justify-content-center">
-                        <div className="price-wrap mb-2">
+                <aside className="col-12 col-md-3 border-left-md bg-light bg-md-transparent border-top border-md-top-0">
+                    <div className="info-aside p-3 p-md-4 h-100 d-flex flex-row flex-md-column justify-content-between justify-content-md-center align-items-center align-items-md-stretch">
+                        <div className="price-wrap mb-0 mb-md-2">
                             {special ? (
-                                <>
+                                <div className="text-left text-md-center">
                                     <span className="h5 price text-primary font-weight-bold">{formatVND(special)}</span>
-                                    <small className="text-muted d-block">
-                                        <del>{formatVND(price)}</del>
-                                    </small>
-                                </>
+                                    <small className="text-muted d-block line-through-md"><del>{formatVND(price)}</del></small>
+                                </div>
                             ) : (
-                                <>
+                                <div className="text-left text-md-center">
                                     <span className="h5 price text-primary font-weight-bold">{formatVND(price)}</span>
                                     <small className="text-muted d-block">/sản phẩm</small>
-                                </>
+                                </div>
                             )}
                         </div>
-
-                        <Link to={`/product-detail/${product.productId}`} className="btn btn-primary btn-block">
-                            Xem chi tiết
+                        <Link to={`/product-detail/${product.productId}`} className="btn btn-primary btn-sm btn-md-block px-4 px-md-2">
+                            Chi tiết
                         </Link>
                     </div>
                 </aside>

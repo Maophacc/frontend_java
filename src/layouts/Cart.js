@@ -209,36 +209,38 @@ const Cart = () => {
                                 </div>
                             </div>
 
-                            <table className="table table-borderless table-shopping-cart mb-0">
-                                <thead className="text-muted">
-                                    <tr className="small text-uppercase">
-                                        <th scope="col">Sản phẩm</th>
-                                        <th scope="col" width="120">Số lượng</th>
-                                        <th scope="col" width="140">Giá</th>
-                                        <th scope="col" className="text-right" width="200"></th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    {cartItems.length ? (
-                                        cartItems.map((item) => (
-                                            <CartItem
-                                                key={item.cartItemId ?? item.productId}
-                                                item={item}
-                                                onToggle={handleToggleCheck}
-                                                onQuantityChange={handleQuantityChange}
-                                                onDelete={handleDeleteItem}
-                                            />
-                                        ))
-                                    ) : (
-                                        <tr>
-                                            <td colSpan={4} className="text-center text-muted py-4">
-                                                Giỏ hàng trống
-                                            </td>
+                            <div className="table-responsive">
+                                <table className="table table-borderless table-shopping-cart mb-0">
+                                    <thead className="text-muted">
+                                        <tr className="small text-uppercase">
+                                            <th scope="col">Sản phẩm</th>
+                                            <th scope="col" width="120">Số lượng</th>
+                                            <th scope="col" width="140">Giá</th>
+                                            <th scope="col" className="text-right" width="200"></th>
                                         </tr>
-                                    )}
-                                </tbody>
-                            </table>
+                                    </thead>
+
+                                    <tbody>
+                                        {cartItems.length ? (
+                                            cartItems.map((item) => (
+                                                <CartItem
+                                                    key={item.cartItemId ?? item.productId}
+                                                    item={item}
+                                                    onToggle={handleToggleCheck}
+                                                    onQuantityChange={handleQuantityChange}
+                                                    onDelete={handleDeleteItem}
+                                                />
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={4} className="text-center text-muted py-4">
+                                                    Giỏ hàng trống
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <div className="card-body border-top">
                                 <Link to="/checkout" className="btn btn-primary float-md-right">
