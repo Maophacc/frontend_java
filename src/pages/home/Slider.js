@@ -14,11 +14,11 @@ const Slider = () => {
                             {/* Slide 1 - Pens */}
                             <div className="carousel-item active h-full">
                                 <div className="absolute inset-0 bg-gradient-to-r from-purple-900/40 to-transparent z-10"></div>
-                                <img src="https://images.unsplash.com/photo-1585336139118-b0a5146c8793?q=80&w=1200&auto=format&fit=crop" className="d-block w-full h-full object-cover animate-ken-burns group-hover:scale-105" alt="Stationery Set" style={{minHeight: '420px'}} />
-                                <div className="absolute bottom-12 left-12 z-20 max-w-md animate-in slide-in-from-left-8 duration-700">
-                                    <span className="bg-white/90 text-purple-600 px-4 py-1.5 rounded-full text-xs font-black mb-4 inline-block tracking-widest uppercase">Bộ sưu tập mới</span>
-                                    <h2 className="text-4xl font-black text-white mb-4 leading-tight drop-shadow-lg">BÚT XINH MỖI NGÀY <br/>CHÍNH HÃNG 100%</h2>
-                                    <button className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg hover:shadow-purple-500/40">
+                                <img src="https://images.unsplash.com/photo-1585336139118-b0a5146c8793?q=80&w=1200&auto=format&fit=crop" className="d-block w-full h-full object-cover animate-ken-burns group-hover:scale-105" alt="Stationery Set" style={{minHeight: '300px'}} />
+                                <div className="absolute bottom-8 left-6 md:bottom-12 md:left-12 z-20 max-w-[80%] md:max-w-md animate-in slide-in-from-left-8 duration-700">
+                                    <span className="bg-white/90 text-purple-600 px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-xs font-black mb-2 md:mb-4 inline-block tracking-widest uppercase">Bộ sưu tập mới</span>
+                                    <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 leading-tight drop-shadow-lg">BÚT XINH MỖI NGÀY <br className="hidden md:block"/>CHÍNH HÃNG 100%</h2>
+                                    <button className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-2.5 md:px-8 md:py-3 rounded-xl font-bold text-sm md:text-base transition-all shadow-lg hover:shadow-purple-500/40">
                                         SĂN DEAL NGAY
                                     </button>
                                 </div>
@@ -26,10 +26,10 @@ const Slider = () => {
                             {/* Slide 2 - Notebooks */}
                             <div className="carousel-item h-full">
                                 <div className="absolute inset-0 bg-gradient-to-r from-purple-900/40 to-transparent z-10"></div>
-                                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1200&auto=format&fit=crop" className="d-block w-full h-full object-cover animate-ken-burns group-hover:scale-105" alt="Notebooks" style={{minHeight: '420px'}} />
-                                <div className="absolute bottom-12 left-12 z-20 max-w-md animate-in slide-in-from-left-8 duration-700">
-                                    <h2 className="text-4xl font-black text-white mb-4 leading-tight drop-shadow-lg">GÓC HỌC TẬP <br/>MƠ ƯỚC</h2>
-                                    <button className="bg-white text-purple-600 px-8 py-3 rounded-xl font-bold transition-all shadow-xl">
+                                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1200&auto=format&fit=crop" className="d-block w-full h-full object-cover animate-ken-burns group-hover:scale-105" alt="Notebooks" style={{minHeight: '300px'}} />
+                                <div className="absolute bottom-8 left-6 md:bottom-12 md:left-12 z-20 max-w-[80%] md:max-w-md animate-in slide-in-from-left-8 duration-700">
+                                    <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 leading-tight drop-shadow-lg">GÓC HỌC TẬP <br className="hidden md:block"/>MƠ ƯỚC</h2>
+                                    <button className="bg-white text-purple-600 px-6 py-2.5 md:px-8 md:py-3 rounded-xl font-bold text-sm md:text-base transition-all shadow-xl">
                                         KHÁM PHÁ BỘ SƯU TẬP
                                     </button>
                                 </div>

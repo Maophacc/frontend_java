@@ -185,11 +185,11 @@ const Header = () => {
                                             <div className="icon-area">
                                                 <IonIcon icon={personOutline} />
                                             </div>
-                                            <small className="text">Đăng nhập</small>
+                                            <small className="text d-none d-sm-block">Đăng nhập</small>
                                         </Link>
                                     </div>
                                 ) : (
-                                    <div className="widget-header mr-3 position-relative" ref={menuRef}>
+                                    <div className="widget-header mr-2 mr-md-3 position-relative" ref={menuRef}>
                                         <button
                                             className="widget-view btn p-0 border-0 bg-transparent"
                                             onClick={() => setUserMenuOpen((s) => !s)}
@@ -198,7 +198,7 @@ const Header = () => {
                                             <div className="icon-area">
                                                 <IonIcon icon={personOutline} />
                                             </div>
-                                            <small className="text">{userName || "Tài khoản"}</small>
+                                            <small className="text d-none d-sm-block">{userName || "Tài khoản"}</small>
                                         </button>
 
                                         {userMenuOpen && (
@@ -227,10 +227,10 @@ const Header = () => {
                                                         <span className="badge badge-pill badge-warning notify">{orderCount}</span>
                                                     )}
                                                 </div>
-                                                <small className="text">Đơn hàng</small>
+                                                <small className="text d-none d-sm-block">Đơn hàng</small>
                                             </Link>
                                         </div>
-                                        <div className="widget-header mr-3">
+                                        <div className="widget-header mr-2 mr-md-3">
                                             <Link to="/cart" className="widget-view no-underline">
                                                 <div className="icon-area">
                                                     <IonIcon icon={cartOutline} />
@@ -238,7 +238,7 @@ const Header = () => {
                                                         <span className="badge badge-pill badge-danger notify">{cartCount}</span>
                                                     )}
                                                 </div>
-                                                <small className="text">Giỏ hàng</small>
+                                                <small className="text d-none d-sm-block">Giỏ hàng</small>
                                             </Link>
                                         </div>
                                     </>
