@@ -11,6 +11,7 @@ import {
     receiptOutline,
 } from "ionicons/icons";
 import Navbar from "../pages/navbar/Navbar";
+import ThemeToggle from "../components/ThemeToggle";
 import {
     GET_CATEGORIES,
     removeToken,
@@ -192,44 +193,49 @@ const Header = () => {
     const formatVND = (n) => Number(n ?? 0).toLocaleString("vi-VN") + "đ";
 
     return (
-        <header className="section-header sticky-top shadow-sm z-50">
+        <header className="section-header sticky-top shadow-sm z-50" style={{ backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border-color)' }}>
             {/* ================= TOP HEADER ================= */}
-            <div className="bg-dark text-white py-2 d-none d-lg-block" style={{ backgroundColor: "#22222" }}>
+            <div className="py-2 d-none d-lg-block" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-lg-6 text-sm">
+                        <div className="col-lg-6 text-sm" style={{ color: 'var(--text-primary)' }}>
                             <span className="mr-4">Call us: (+84) 911583051</span>
                             <span>Email: minhtri582005@gmail.com</span>
                         </div>
-                        <div className="col-lg-6 text-right text-sm">
-                            <span className="mr-4 cursor-pointer hover:text-pink-400">English ▼</span>
-                            <span className="mr-4 cursor-pointer hover:text-pink-400">USD ▼</span>
-                            <Link to="/deals" className="text-pink-400 font-bold hover:text-white transition-colors">Daily Deals</Link>
+                        <div className="col-lg-6 text-right text-sm" style={{ color: 'var(--text-primary)' }}>
+                            <span className="mr-4 cursor-pointer" style={{ color: 'var(--text-secondary)' }}>English ▼</span>
+                            <span className="mr-4 cursor-pointer" style={{ color: 'var(--text-secondary)' }}>USD ▼</span>
+                            <Link to="/deals" className="font-bold" style={{ color: 'var(--primary-color)' }}>Daily Deals</Link>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* ================= MAIN HEADER ================= */}
-            <div className="bg-white py-4 border-bottom border-gray-100">
+            <div className="py-3 py-md-4 border-bottom" style={{ backgroundColor: 'var(--bg-primary)', borderBottomColor: 'var(--border-color)' }}>
                 <div className="container">
-                    <div className="row align-items-center">
+                    <div className="row align-items-center gap-2 gap-md-3">
                         {/* Logo */}
-                        <div className="col-lg-3 col-sm-4 col-4">
+                        <div className="col-lg-3 col-sm-4 col-4 order-1">
                             <Link to="/" className="brand-wrap">
-                                <h2 className="m-0 font-black tracking-tighter" style={{ color: "#222222", fontSize: "24px" }}>
-                                    LEO<span style={{ color: "#e97081" }}>STATIONERO</span>
+                                <h2 className="m-0 font-black tracking-tighter" style={{ color: 'var(--text-primary)', fontSize: 'clamp(18px, 5vw, 24px)' }}>
+                                    LEO<span style={{ color: 'var(--primary-color)' }}>STATIONERO</span>
                                 </h2>
                             </Link>
                         </div>
 
                         {/* Search */}
-                        <div className="col-lg-6 col-sm-8 col-8 relative" ref={searchRef}>
+                        <div className="col-lg-6 col-sm-8 col-7 relative order-2 order-md-3" ref={searchRef}>
                             <form onSubmit={handleSubmitSearch} className="d-flex w-100 position-relative">
                                 <input
                                     type="text"
-                                    className="form-control rounded-none border border-[#e5e5e5] px-4 py-2 text-sm focus:border-[#222222] focus:ring-0 transition-colors"
-                                    placeholder="Search our catalog..."
+                                    className="form-control rounded-0 px-3 px-md-4 py-2 text-sm focus:ring-0 transition-colors"
+                                    style={{
+                                        border: '2px solid var(--border-color)',
+                                        backgroundColor: 'var(--bg-secondary)',
+                                        color: 'var(--text-primary)'
+                                    }}
+                                    placeholder="Tìm kiếm sản phẩm..."
                                     value={searchText}
                                     onChange={(e) => {
                                         setSearchText(e.target.value);
@@ -241,18 +247,13 @@ const Header = () => {
                                 />
                                 <button
                                     type="submit"
-                                    className="btn rounded-none px-4 text-white hover:bg-[#d65c6d] transition-colors flex items-center justify-center"
-                                    style={{ backgroundColor: "#222222" }}
+                                    className="btn rounded-0 px-3 px-md-4 text-white hover:opacity-80 transition-opacity flex items-center justify-center"
+                                    style={{ backgroundColor: 'var(--primary-color)' }}
                                 >
                                     <IonIcon icon={searchOutline} style={{ fontSize: '1.2rem' }} />
-                                </button>
-                            </form>
-
-                            {/* Search Suggestions Dropdown */}
-                            {showSuggestions && (searchText.trim().length >= 2) && (
-                                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 shadow-lg z-50 rounded-b-md overflow-hidden">
+                                </button>position-absolute top-full left-0 right-0 mt-1 rounded-b-md overflow-hidden shadow-lg z-50" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderTop: 'none' }}>
                                     {isSearching ? (
-                                        <div className="p-3 text-center text-sm text-gray-500">Đang tìm kiếm...</div>
+                                        <div className="p-3 text-center text-sm" style={{ color: 'var(--text-muted)' }}>Đang tìm kiếm...</div>
                                     ) : searchSuggestions.length > 0 ? (
                                         <ul className="list-unstyled mb-0 max-h-[300px] overflow-y-auto">
                                             {searchSuggestions.map((item) => {
@@ -264,75 +265,100 @@ const Header = () => {
                                                 const price = item.specialPrice || item.price || 0;
 
                                                 return (
-                                                    <li key={item.productId || item.ProductId} className="border-b border-gray-100 last:border-b-0">
+                                                    <li key={item.productId || item.ProductId} style={{ borderBottom: '1px solid var(--border-color)' }} className="last:border-b-0">
                                                         <button 
                                                             type="button" 
-                                                            className="w-full text-left p-2 hover:bg-gray-50 flex items-center gap-3 transition-colors"
+                                                            className="w-100 text-left p-2 p-md-3 d-flex align-items-center gap-3 transition-colors"
+                                                            style={{ 
+                                                                backgroundColor: 'var(--bg-primary)',
+                                                                color: 'var(--text-primary)',
+                                                                border: 'none',
+                                                                cursor: 'pointer'
+                                                            }}
+                                                            onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--bg-secondary)'}
+                                                            onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--bg-primary)'}
                                                             onClick={() => handleSuggestionClick(item.productId || item.ProductId)}
                                                         >
-                                                            <div className="w-12 h-12 flex-shrink-0 bg-white border border-gray-100 flex items-center justify-center p-1">
-                                                                <img src={imgUrl} alt={item.productName || item.name} className="max-w-full max-h-full object-contain" />
+                                                            <div className="flex-shrink-0 bg-white border d-flex align-items-center justify-content-center p-1" style={{ width: '48px', height: '48px', borderColor: 'var(--border-color)' }}>
+                                                                <img src={imgUrl} alt={item.productName || item.name} className="mw-100 mh-100" style={{ objectFit: 'contain' }} />
                                                             </div>
                                                             <div className="flex-1 min-w-0">
-                                                                <div className="text-sm text-[#222222] font-medium truncate">{item.productName || item.name}</div>
-                                                                <div className="text-xs font-bold text-[#e97081] mt-1">{formatVND(price)}</div>
+                                                                <div className="text-sm font-weight-600 text-truncate" style={{ color: 'var(--text-primary)' }}>{item.productName || item.name}</div>
+                                                                <div className="text-xs font-weight-bold mt-1" style={{ color: 'var(--primary-color)' }}>{formatVND(price)}</div>
                                                             </div>
                                                         </button>
                                                     </li>
                                                 );
                                             })}
-                                            <li className="bg-gray-50 p-2 text-center border-t border-gray-200">
+                                            <li style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }} className="p-2 p-md-3 text-center">
                                                 <button 
                                                     type="button" 
                                                     onClick={handleSubmitSearch}
-                                                    className="text-xs font-bold text-[#222222] hover:text-[#e97081] uppercase tracking-wide w-full"
-                                                >
-                                                    View All Results
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    ) : (
-                                        <div className="p-3 text-center text-sm text-gray-500">Không tìm thấy sản phẩm.</div>
-                                    )}
-                                </div>
-                            )}
-                        </div>
+                                                    className="text-xs font-weight-bold uppercase tracking-wide w-100 border-0"
+                                                    style={{ 
+                                                        backgroundColor: 'transparent',
+                                                        color: 'var(--text-primary)',
+                                                        cursor: 'pointer',
+                                                        transition: 'color var(--transition-fast)'
+                                                    }}2 order-3">
+                            {/* Theme Toggle */}
+                            <ThemeToggle />
 
-                        {/* Icons */}
-                        <div className="col-lg-3 d-none d-lg-flex justify-content-end align-items-center gap-4">
                             {/* Account Dropdown */}
-                            <div className="position-relative" ref={menuRef}>
+                            <div className="position-relative" ref={menuRef} style={{ minWidth: '80px' }}>
                                 <div
                                     className="d-flex flex-column align-items-center cursor-pointer group"
                                     onClick={() => setUserMenuOpen(!userMenuOpen)}
+                                    style={{ cursor: 'pointer', userSelect: 'none' }}
                                 >
-                                    <IonIcon icon={personOutline} style={{ fontSize: '1.5rem', color: "#222222" }} className="group-hover:text-[#e97081] transition-colors" />
-                                    <span className="text-[10px] uppercase font-bold text-gray-500 mt-1">{isLoggedIn ? userName : "Đăng nhập"}</span>
+                                    <IonIcon icon={personOutline} style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }} />
+                                    <span className="text-[10px] uppercase font-weight-bold mt-1" style={{ color: 'var(--text-secondary)', fontSize: '0.7rem' }}>{isLoggedIn ? userName : "Đăng nhập"}</span>
                                 </div>
 
                                 {userMenuOpen && (
-                                    <div className="position-absolute bg-white shadow border rounded p-2 z-50" style={{ top: '120%', right: 0, minWidth: '200px' }}>
+                                    <div className="position-absolute shadow rounded p-2 z-50" style={{ top: '120%', right: 0, minWidth: '200px', backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)' }}>
                                         {isLoggedIn ? (
                                             <>
-                                                <div className="px-3 py-2 border-bottom">
-                                                    <span className="d-block font-weight-bold text-dark text-truncate">{userName}</span>
-                                                    <small className="text-muted text-truncate">{getUserEmail()}</small>
+                                                <div className="px-3 py-2" style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-primary)' }}>
+                                                    <span className="d-block font-weight-bold text-truncate">{userName}</span>
+                                                    <small style={{ color: 'var(--text-muted)' }} className="text-truncate">{getUserEmail()}</small>
                                                 </div>
-                                                <Link to="/profile" className="dropdown-item py-2 d-flex align-items-center gap-2" onClick={() => setUserMenuOpen(false)}>
+                                                <Link to="/profile" className="dropdown-item py-2 d-flex align-items-center gap-2" style={{ color: 'var(--text-primary)', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }} onClick={() => setUserMenuOpen(false)}>
                                                     <IonIcon icon={personOutline} /> Tài khoản của tôi
                                                 </Link>
-                                                <Link to="/profile/orders" className="dropdown-item py-2 d-flex align-items-center gap-2" onClick={() => setUserMenuOpen(false)}>
+                                                <Link to="/profile/orders" className="dropdown-item py-2 d-flex align-items-center gap-2" style={{ color: 'var(--text-primary)', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }} onClick={() => setUserMenuOpen(false)}>
                                                     <IonIcon icon={listOutline} /> Đơn mua
                                                 </Link>
-                                                <Link to="/profile/setting" className="dropdown-item py-2 d-flex align-items-center gap-2" onClick={() => setUserMenuOpen(false)}>
+                                                <Link to="/profile/setting" className="dropdown-item py-2 d-flex align-items-center gap-2" style={{ color: 'var(--text-primary)', backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }} onClick={() => setUserMenuOpen(false)}>
                                                     <IonIcon icon={settingsOutline} /> Cài đặt
                                                 </Link>
-                                                <div className="dropdown-divider"></div>
-                                                <button onClick={handleLogout} className="dropdown-item py-2 text-danger d-flex align-items-center gap-2">
+                                                <div style={{ borderTop: '1px solid var(--border-color)' }} className="my-2"></div>
+                                                <button onClick={handleLogout} className="dropdown-item py-2 text-danger d-flex align-items-center gap-2 w-100" style={{ color: 'var(--danger-color)', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
                                                     <IonIcon icon={logOutOutline} /> Đăng xuất
                                                 </button>
                                             </>
                                         ) : (
+                                            <div className="p-2 text-center">
+                                                <p className="small mb-2" style={{ color: 'var(--text-secondary)' }}>Đăng nhập để theo dõi đơn hàng</p>
+                                                <Link to="/login" className="btn btn-sm btn-block text-white mb-2" style={{ backgroundColor: 'var(--primary-color)' }} onClick={() => setUserMenuOpen(false)}>Đăng nhập</Link>
+                                                <Link to="/register" className="btn btn-outline-primary btn-sm btn-block" style={{ color: 'var(--primary-color)', borderColor: 'var(--primary-color)' }} onClick={() => setUserMenuOpen(false)}>Đăng ký</Link>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Cart */}
+                            <Link to="/cart" className="d-flex flex-column align-items-center group text-decoration-none position-relative" style={{ minWidth: '80px', color: 'var(--text-primary)' }}>
+                                <div className="position-relative">
+                                    <IonIcon icon={cartOutline} style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }} />
+                                    {cartCount > 0 && (
+                                        <span className="position-absolute d-flex align-items-center justify-content-center text-[10px] font-weight-bold shadow-sm text-white rounded-circle" style={{ top: '-5px', right: '-8px', width: '18px', height: '18px', backgroundColor: 'var(--primary-color)' }}>
+                                            {cartCount}
+                                        </span>
+                                    )}
+                                </div>
+                                <span className="text-[10px] uppercase font-weight-bold mt-1" style={{ color: 'var(--text-secondary)', fontSize: '0.7rem' }}
                                             <div className="p-2 text-center">
                                                 <p className="small text-muted mb-2">Đăng nhập để theo dõi đơn hàng</p>
                                                 <Link to="/login" className="btn btn-sm btn-block text-white mb-2" style={{ backgroundColor: "#222222" }} onClick={() => setUserMenuOpen(false)}>Đăng nhập</Link>

@@ -14,19 +14,38 @@ import {
 
 const Footer = () => {
     return (
-        <footer className="section-footer bg-[#222222] text-[#cccccc]">
+        <footer className="section-footer" style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}>
             {/* Newsletter Section (Top of Footer) */}
-            <div className="border-b border-[#333333] py-5">
+            <div style={{ borderBottom: '1px solid var(--border-color)' }} className="py-4 py-md-5">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-6 mb-3 mb-md-0">
-                            <h4 className="text-white font-bold mb-1 tracking-wide">SIGN UP FOR NEWSLETTER</h4>
-                            <p className="text-sm m-0">Get the latest updates on new products and upcoming sales</p>
+                            <h4 className="font-weight-bold mb-1 tracking-wide" style={{ color: 'var(--text-primary)' }}>ĐĂNG KÝ NHẬN TIN</h4>
+                            <p className="text-sm m-0" style={{ color: 'var(--text-secondary)' }}>Nhận cập nhật mới về sản phẩm và ưu đãi sắp tới</p>
                         </div>
                         <div className="col-md-6">
-                            <form className="d-flex w-100">
-                                <input type="email" placeholder="Your email address..." className="form-control rounded-0 border-0 px-4 py-3 bg-[#333333] text-white focus:outline-none" />
-                                <button className="btn text-white font-bold px-4 rounded-0 uppercase tracking-widest hover:bg-[#d65c6d] transition-colors" style={{ backgroundColor: "#e97081" }}>Subscribe</button>
+                            <form className="d-flex w-100 gap-0">
+                                <input 
+                                    type="email" 
+                                    placeholder="Địa chỉ email của bạn..." 
+                                    className="form-control rounded-0 border-0 px-3 px-md-4 py-2 py-md-3"
+                                    style={{
+                                        backgroundColor: 'var(--bg-primary)',
+                                        color: 'var(--text-primary)',
+                                        flex: 1
+                                    }}
+                                />
+                                <button 
+                                    className="btn text-white font-weight-bold px-3 px-md-4 rounded-0 uppercase tracking-widest" 
+                                    style={{ 
+                                        backgroundColor: 'var(--primary-color)',
+                                        transition: 'all var(--transition-fast)'
+                                    }}
+                                    onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--primary-deep)'}
+                                    onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--primary-color)'}
+                                >
+                                    Đăng ký
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -34,58 +53,58 @@ const Footer = () => {
             </div>
 
             <div className="container">
-                <section className="footer-top py-5">
+                <section className="footer-top py-4 py-md-5">
                     <div className="row">
                         <aside className="col-md-4 col-12 mb-4 mb-md-0">
                             <article className="mr-md-4">
-                                <h5 className="title text-white font-bold mb-4 uppercase tracking-wide">Contact Us</h5>
-                                <ul className="list-icon list-unstyled text-sm leading-loose">
+                                <h5 className="title font-weight-bold mb-3 mb-md-4 uppercase tracking-wide" style={{ color: 'var(--text-primary)' }}>Liên Hệ Chúng Tôi</h5>
+                                <ul className="list-icon list-unstyled text-sm" style={{ lineHeight: '1.8' }}>
                                     <li className="d-flex align-items-start mb-3">
-                                        <IonIcon icon={locationOutline} className="mr-3 text-[#e97081] mt-1" style={{ fontSize: '1.2rem' }} />
-                                        <span>Leo Stationero HQ, 123 Designer Street, New York, NY 10001</span>
+                                        <IonIcon icon={locationOutline} className="mr-3 flex-shrink-0 mt-1" style={{ fontSize: '1.2rem', color: 'var(--primary-color)' }} />
+                                        <span style={{ color: 'var(--text-secondary)' }}>Leo Stationero, 123 Đường Designer, New York, NY 10001</span>
                                     </li>
                                     <li className="d-flex align-items-center mb-3">
-                                        <IonIcon icon={mailOutline} className="mr-3 text-[#e97081]" style={{ fontSize: '1.2rem' }} />
-                                        <span className="hover:text-[#e97081] cursor-pointer transition-colors">support@leostationero.com</span>
+                                        <IonIcon icon={mailOutline} className="mr-3 flex-shrink-0" style={{ fontSize: '1.2rem', color: 'var(--primary-color)' }} />
+                                        <a href="mailto:support@leostationero.com" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>support@leostationero.com</a>
                                     </li>
                                     <li className="d-flex align-items-center mb-3">
-                                        <IonIcon icon={callOutline} className="mr-3 text-[#e97081]" style={{ fontSize: '1.2rem' }} />
-                                        <span>(+84) 123 456 789</span>
+                                        <IonIcon icon={callOutline} className="mr-3 flex-shrink-0" style={{ fontSize: '1.2rem', color: 'var(--primary-color)' }} />
+                                        <a href="tel:+84123456789" className="text-decoration-none" style={{ color: 'var(--text-secondary)' }}>(+84) 123 456 789</a>
                                     </li>
                                 </ul>
                             </article>
                         </aside>
                         <aside className="col-md col-6">
-                            <h5 className="title text-white font-bold mb-4 uppercase tracking-wide">Information</h5>
-                            <ul className="list-unstyled text-sm leading-loose">
-                                <li className="mb-2"> <Link to="/about" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">About Us</Link></li>
-                                <li className="mb-2"> <Link to="/career" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">Careers</Link></li>
-                                <li className="mb-2"> <Link to="/store" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">Store Locator</Link></li>
-                                <li className="mb-2"> <Link to="/rules" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">Terms & Conditions</Link></li>
+                            <h5 className="title font-weight-bold mb-3 mb-md-4 uppercase tracking-wide" style={{ color: 'var(--text-primary)' }}>Thông Tin</h5>
+                            <ul className="list-unstyled text-sm" style={{ lineHeight: '1.8' }}>
+                                <li className="mb-2"> <Link to="/about" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Về Chúng Tôi</Link></li>
+                                <li className="mb-2"> <Link to="/career" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Cơ Hội Việc Làm</Link></li>
+                                <li className="mb-2"> <Link to="/store" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Tìm Cửa Hàng</Link></li>
+                                <li className="mb-2"> <Link to="/rules" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Điều Khoản & Điều Kiện</Link></li>
                             </ul>
                         </aside>
                         <aside className="col-md col-6">
-                            <h5 className="title text-white font-bold mb-4 uppercase tracking-wide">Customer Service</h5>
-                            <ul className="list-unstyled text-sm leading-loose">
-                                <li className="mb-2"> <Link to="/contact" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">Contact Support</Link></li>
-                                <li className="mb-2"> <Link to="/refund" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">Returns & Exchanges</Link></li>
-                                <li className="mb-2"> <Link to="/shipping" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">Shipping Info</Link></li>
-                                <li className="mb-2"> <Link to="/faq" className="text-[#cccccc] hover:text-[#e97081] transition-colors no-underline">FAQ</Link></li>
+                            <h5 className="title font-weight-bold mb-3 mb-md-4 uppercase tracking-wide" style={{ color: 'var(--text-primary)' }}>Dịch Vụ Khách Hàng</h5>
+                            <ul className="list-unstyled text-sm" style={{ lineHeight: '1.8' }}>
+                                <li className="mb-2"> <Link to="/contact" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Liên Hệ Hỗ Trợ</Link></li>
+                                <li className="mb-2"> <Link to="/refund" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Hoàn Trả & Trao Đổi</Link></li>
+                                <li className="mb-2"> <Link to="/shipping" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Thông Tin Vận Chuyển</Link></li>
+                                <li className="mb-2"> <Link to="/faq" className="text-decoration-none" style={{ color: 'var(--text-secondary)', transition: 'color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Câu Hỏi Thường Gặp</Link></li>
                             </ul>
                         </aside>
                         <aside className="col-md-3 col-12 mt-4 mt-md-0">
-                            <h5 className="title text-white font-bold mb-4 uppercase tracking-wide">Follow Us</h5>
-                            <div className="d-flex gap-3 mt-2">
-                                <a href="#" className="w-10 h-10 rounded-full bg-[#333333] text-white flex items-center justify-center hover:bg-[#e97081] transition-colors"><IonIcon icon={logoFacebook} /></a>
-                                <a href="#" className="w-10 h-10 rounded-full bg-[#333333] text-white flex items-center justify-center hover:bg-[#e97081] transition-colors"><IonIcon icon={logoInstagram} /></a>
-                                <a href="#" className="w-10 h-10 rounded-full bg-[#333333] text-white flex items-center justify-center hover:bg-[#e97081] transition-colors"><IonIcon icon={logoTwitter} /></a>
-                                <a href="#" className="w-10 h-10 rounded-full bg-[#333333] text-white flex items-center justify-center hover:bg-[#e97081] transition-colors"><IonIcon icon={logoYoutube} /></a>
+                            <h5 className="title font-weight-bold mb-3 mb-md-4 uppercase tracking-wide" style={{ color: 'var(--text-primary)' }}>Theo Dõi Chúng Tôi</h5>
+                            <div className="d-flex gap-2 gap-md-3 mt-2">
+                                <a href="#" className="rounded-circle text-white d-flex align-items-center justify-content-center transition-all" style={{ width: '40px', height: '40px', backgroundColor: 'var(--bg-primary)', transition: 'background-color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--bg-primary)'}><IonIcon icon={logoFacebook} /></a>
+                                <a href="#" className="rounded-circle text-white d-flex align-items-center justify-content-center transition-all" style={{ width: '40px', height: '40px', backgroundColor: 'var(--bg-primary)', transition: 'background-color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--bg-primary)'}><IonIcon icon={logoInstagram} /></a>
+                                <a href="#" className="rounded-circle text-white d-flex align-items-center justify-content-center transition-all" style={{ width: '40px', height: '40px', backgroundColor: 'var(--bg-primary)', transition: 'background-color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--bg-primary)'}><IonIcon icon={logoTwitter} /></a>
+                                <a href="#" className="rounded-circle text-white d-flex align-items-center justify-content-center transition-all" style={{ width: '40px', height: '40px', backgroundColor: 'var(--bg-primary)', transition: 'background-color var(--transition-fast)' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'var(--primary-color)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'var(--bg-primary)'}><IonIcon icon={logoYoutube} /></a>
                             </div>
                         </aside>
                     </div>
                 </section>
-                <section className="footer-bottom text-center py-4 border-t border-[#333333] mt-2">
-                    <p className="text-sm m-0"> &copy; {new Date().getFullYear()} Leo Stationero Demo. All rights reserved. </p>
+                <section className="footer-bottom text-center py-3 py-md-4" style={{ borderTop: '1px solid var(--border-color)' }}>
+                    <p className="text-sm m-0" style={{ color: 'var(--text-muted)' }}> &copy; {new Date().getFullYear()} Leo Stationero. Tất cả quyền được bảo lưu. </p>
                 </section>
             </div>
         </footer>
