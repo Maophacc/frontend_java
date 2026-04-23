@@ -319,7 +319,7 @@ const Header = () => {
                         </div>
 
                         {/* Right Actions */}
-                        <div className="col-lg-3 col-sm-7 col-7 d-flex align-items-center justify-content-end gap-3 order-2 order-lg-3">
+                        <div className="col-lg-3 col-sm-7 col-7 d-flex align-items-center justify-content-end justify-content-lg-start gap-4 order-2 order-lg-3 pl-lg-4">
                             {/* Theme Toggle */}
                             <ThemeToggle />
 
