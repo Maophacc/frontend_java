@@ -225,7 +225,7 @@ const Header = () => {
                         </div>
 
                         {/* Search */}
-                        <div className="col-lg-6 col-sm-8 col-7 relative order-2 order-md-3" ref={searchRef}>
+                        <div className="col-lg-6 col-12 mt-3 mt-lg-0 relative order-3 order-lg-2" ref={searchRef}>
                             <form onSubmit={handleSubmitSearch} className="d-flex w-100 position-relative">
                                 <input
                                     type="text"
@@ -251,7 +251,12 @@ const Header = () => {
                                     style={{ backgroundColor: 'var(--primary-color)' }}
                                 >
                                     <IonIcon icon={searchOutline} style={{ fontSize: '1.2rem' }} />
-                                </button>position-absolute top-full left-0 right-0 mt-1 rounded-b-md overflow-hidden shadow-lg z-50" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderTop: 'none' }}>
+                                </button>
+                            </form>
+
+                            {/* Search Suggestions Dropdown */}
+                            {showSuggestions && (searchText.trim().length >= 2) && (
+                                <div className="position-absolute top-full left-0 right-0 mt-1 rounded-b-md overflow-hidden shadow-lg z-50" style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderTop: 'none' }}>
                                     {isSearching ? (
                                         <div className="p-3 text-center text-sm" style={{ color: 'var(--text-muted)' }}>Đang tìm kiếm...</div>
                                     ) : searchSuggestions.length > 0 ? (
@@ -300,7 +305,21 @@ const Header = () => {
                                                         color: 'var(--text-primary)',
                                                         cursor: 'pointer',
                                                         transition: 'color var(--transition-fast)'
-                                                    }}2 order-3">
+                                                    }}
+                                                >
+                                                    Xem tất cả kết quả
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    ) : (
+                                        <div className="p-3 text-center text-sm" style={{ color: 'var(--text-muted)' }}>Không tìm thấy sản phẩm.</div>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Right Actions */}
+                        <div className="col-lg-3 col-sm-7 col-7 d-flex align-items-center justify-content-end gap-3 order-2 order-lg-3">
                             {/* Theme Toggle */}
                             <ThemeToggle />
 
@@ -358,28 +377,7 @@ const Header = () => {
                                         </span>
                                     )}
                                 </div>
-                                <span className="text-[10px] uppercase font-weight-bold mt-1" style={{ color: 'var(--text-secondary)', fontSize: '0.7rem' }}
-                                            <div className="p-2 text-center">
-                                                <p className="small text-muted mb-2">Đăng nhập để theo dõi đơn hàng</p>
-                                                <Link to="/login" className="btn btn-sm btn-block text-white mb-2" style={{ backgroundColor: "#222222" }} onClick={() => setUserMenuOpen(false)}>Đăng nhập</Link>
-                                                <Link to="/register" className="btn btn-outline-dark btn-sm btn-block" onClick={() => setUserMenuOpen(false)}>Đăng ký</Link>
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Cart */}
-                            <Link to="/cart" className="d-flex flex-column align-items-center group text-decoration-none relative">
-                                <div className="position-relative">
-                                    <IonIcon icon={cartOutline} style={{ fontSize: '1.5rem', color: "#222222" }} className="group-hover:text-[#e97081] transition-colors" />
-                                    {cartCount > 0 && (
-                                        <span className="position-absolute bg-[#e97081] text-white rounded-circle d-flex align-items-center justify-content-center text-[10px] font-bold shadow-sm" style={{ top: '-5px', right: '-8px', width: '18px', height: '18px' }}>
-                                            {cartCount}
-                                        </span>
-                                    )}
-                                </div>
-                                <span className="text-[10px] uppercase font-bold text-gray-500 mt-1">Giỏ hàng</span>
+                                <span className="text-[10px] uppercase font-weight-bold mt-1" style={{ color: 'var(--text-secondary)', fontSize: '0.7rem' }}>Giỏ hàng</span>
                             </Link>
                         </div>
                     </div>
