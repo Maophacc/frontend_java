@@ -45,8 +45,8 @@ export default function ChatWidget() {
     }, [messages, open, minimized]);
 
     const getImageUrl = (imgName) => {
-        if (!imgName) return "https://via.placeholder.com/150";
-        if (String(imgName).startsWith("http")) return imgName;
+        if (!imgName) return require("../asset/images/items/1.jpg");
+        if (String(imgName).startsWith("http") || String(imgName).startsWith("data:")) return imgName;
         return `${IMAGE_BASE_URL}/${imgName}`;
     };
 
@@ -328,11 +328,11 @@ export default function ChatWidget() {
                                                     {m.products.map((p, idx) => (
                                                         <div key={p.productId} style={styles.productCard}>
                                                             <img
-                                                                src={getImageUrl(p.image)}
+                                                                src={getImageUrl(p.image) || require("../asset/images/items/1.jpg")}
                                                                 alt={p.productName}
                                                                 style={styles.productImage}
                                                                 onError={(e) => {
-                                                                    e.currentTarget.src = "https://via.placeholder.com/150";
+                                                                    e.currentTarget.src = require("../asset/images/items/1.jpg");
                                                                 }}
                                                             />
 
