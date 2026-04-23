@@ -214,7 +214,7 @@ const Header = () => {
             {/* ================= MAIN HEADER ================= */}
             <div className="py-3 py-md-4 border-bottom" style={{ backgroundColor: 'var(--bg-primary)', borderBottomColor: 'var(--border-color)' }}>
                 <div className="container">
-                    <div className="row align-items-center gap-2 gap-md-3">
+                    <div className="row align-items-center">
                         {/* Logo */}
                         <div className="col-lg-3 col-sm-4 col-4 order-1">
                             <Link to="/" className="brand-wrap">
