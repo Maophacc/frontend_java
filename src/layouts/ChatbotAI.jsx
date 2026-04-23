@@ -7,6 +7,7 @@ import {
     removeOutline,
 } from "ionicons/icons";
 import { useNavigate } from "react-router-dom";
+import { GET_PRODUCT, GET_PRODUCTS_BY_KEYWORD, GET_CATEGORIES, GET_PRODUCTS_BY_CATEGORY } from "../config/apiService";
 
 const NODE_SERVER_URL = process.env.REACT_APP_CHAT_SERVER_URL || "https://studentshop-chatbot.onrender.com";
 const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL || "https://studentshop.onrender.com/images";
@@ -76,6 +77,61 @@ export default function ChatWidget() {
         try {
             const userEmail = localStorage.getItem("user-email") || "guest@example.com";
             const token = localStorage.getItem("jwt-token") || "";
+
+            const lowerInput = userMsg.text.toLowerCase();
+            let localProducts = [];
+            let localText = "";
+            let handledLocally = false;
+
+            if (lowerInput === "sp hot" || lowerInput === "sản phẩm hot") {
+                 const res = await GET_PRODUCT(0, 5, "price", "desc");
+                 localProducts = res.products || [];
+                 localText = "Đây là các sản phẩm hot dành cho bạn:";
+                 handledLocally = true;
+            } else if (lowerInput === "sp mới" || lowerInput === "sản phẩm mới") {
+                 const res = await GET_PRODUCT(0, 5, "productId", "desc");
+                 localProducts = res.products || [];
+                 localText = "Đây là các sản phẩm mới nhất:";
+                 handledLocally = true;
+            } else if (!lowerInput.startsWith("mua cái số")) {
+                 const resCats = await GET_CATEGORIES(0, 100);
+                 const matchedCat = resCats.find(c => c.categoryName.toLowerCase() === lowerInput);
+                 if (matchedCat) {
+                     const resCatProds = await GET_PRODUCTS_BY_CATEGORY(matchedCat.categoryId, 0, 5);
+                     if (resCatProds && resCatProds.products && resCatProds.products.length > 0) {
+                         localProducts = resCatProds.products;
+                         localText = `Các sản phẩm trong danh mục "${matchedCat.categoryName}":`;
+                     } else {
+                         localText = "Danh mục này hiện chưa có sản phẩm nào.";
+                     }
+                     handledLocally = true;
+                 } else {
+                     const resSearch = await GET_PRODUCTS_BY_KEYWORD(userMsg.text, 0, 5);
+                     if (resSearch && resSearch.products && resSearch.products.length > 0) {
+                         localProducts = resSearch.products;
+                         localText = `Tìm thấy ${localProducts.length} sản phẩm phù hợp:`;
+                         handledLocally = true;
+                     } else {
+                         const isGreeting = ["chào", "hi", "hello", "giúp", "tư vấn", "cảm ơn", "bye"].some(w => lowerInput.includes(w));
+                         if (!isGreeting) {
+                             localText = "Sản phẩm bạn đang tìm không tồn tại.";
+                             handledLocally = true;
+                         }
+                     }
+                 }
+            }
+
+            if (handledLocally) {
+                const botMsg = {
+                    id: (Date.now() + 1).toString(),
+                    role: "model",
+                    text: localText,
+                    products: localProducts,
+                };
+                setMessages((prev) => [...prev, botMsg]);
+                setLoading(false);
+                return;
+            }
 
             // ✅ IMPORTANT: dùng messages cũ (chưa gồm userMsg) giống RN
             const historyForBot = buildHistoryForBot(messages);
