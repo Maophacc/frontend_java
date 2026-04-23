@@ -113,7 +113,10 @@ export default function ChatWidget() {
                          handledLocally = true;
                      } else {
                          const isGreeting = ["chào", "hi", "hello", "giúp", "tư vấn", "cảm ơn", "bye"].some(w => lowerInput.includes(w));
-                         if (!isGreeting) {
+                         if (isGreeting) {
+                             localText = "Chào bạn! 👋 Mình là trợ lý AI. Mình có thể giúp bạn tìm kiếm sản phẩm. Bạn muốn tìm gì nào?";
+                             handledLocally = true;
+                         } else {
                              localText = "Sản phẩm bạn đang tìm không tồn tại.";
                              handledLocally = true;
                          }
@@ -136,18 +139,30 @@ export default function ChatWidget() {
             // ✅ IMPORTANT: dùng messages cũ (chưa gồm userMsg) giống RN
             const historyForBot = buildHistoryForBot(messages);
 
-            const res = await fetch(`${NODE_SERVER_URL}/chat`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    message: userMsg.text,
-                    history: historyForBot,
-                    userEmail,
-                    token,
-                }),
-            });
-
-            const data = await res.json();
+            let data;
+            try {
+                const res = await fetch(`${NODE_SERVER_URL}/chat`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        message: userMsg.text,
+                        history: historyForBot,
+                        userEmail,
+                        token,
+                    }),
+                });
+                
+                if (!res.ok) {
+                    throw new Error("Chatbot server returned " + res.status);
+                }
+                data = await res.json();
+            } catch (fetchErr) {
+                console.warn("Chatbot server is unreachable, using fallback:", fetchErr);
+                data = {
+                    text: "Xin lỗi, tính năng AI nâng cao (như mua hàng bằng lệnh hoặc trả lời phức tạp) đang được bảo trì do server bị ngắt kết nối. Tuy nhiên, bạn vẫn có thể tìm kiếm sản phẩm bằng cách gõ tên sản phẩm, 'sp hot', hoặc 'sp mới' nhé!",
+                    products: []
+                };
+            }
 
             const botMsg = {
                 id: (Date.now() + 1).toString(),
@@ -161,7 +176,7 @@ export default function ChatWidget() {
             console.error(err);
             setMessages((prev) => [
                 ...prev,
-                { id: Date.now().toString(), role: "model", text: "❌ Lỗi kết nối server." },
+                { id: Date.now().toString(), role: "model", text: "❌ Lỗi kết nối API chính." },
             ]);
         } finally {
             setLoading(false);
