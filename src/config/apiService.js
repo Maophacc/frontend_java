@@ -162,23 +162,36 @@ export async function GET_PRODUCTS_BY_CATEGORY(categoryId, pageNumber = 0, pageS
   };
 }
 
-export function GET_PRODUCTS_BY_KEYWORD(
+export async function GET_PRODUCTS_BY_KEYWORD(
   keyword,
-  pageNumber = 1,
+  pageNumber = 0,
   pageSize = 10,
   sortBy = "productId",
   sortOrder = "desc",
   categoryId = 0
 ) {
-  // Swagger có param 'search' cho keyword
-  return callApi("Product", "GET", null, {
+  const params = {
     search: keyword,
     pageNumber,
     pageSize,
     sortBy,
     sortOrder,
-    categoryId,
-  });
+  };
+  if (categoryId > 0) {
+    params.categoryId = categoryId;
+  }
+
+  const data = await callApi("Product", "GET", null, params);
+
+  const root = data?.value || data;
+  const items = Array.isArray(root) ? root : (root.products || root.Products || root.content || root.data || []);
+  
+  return {
+    products: items.map(transformProduct),
+    totalPages: root.totalPages || root.TotalPages || 1,
+    totalElements: root.totalCount || root.TotalCount || items.length,
+    pageNumber: root.pageNumber || root.PageNumber
+  };
 }
 
 // ===== Users =====

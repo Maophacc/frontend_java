@@ -109,7 +109,7 @@ const Listing = () => {
             setProducts(list);
             setTotalPages(Number(data?.totalPages ?? 1));
             setTotalElements(Number(data?.totalElements ?? 0));
-            setLastPage(Boolean(data?.lastPage));
+            setLastPage(page >= (data?.totalPages ?? 1) - 1);
 
             // backend trả pageNumber 0-based => sync lại UI
             if (typeof data?.pageNumber === "number") {

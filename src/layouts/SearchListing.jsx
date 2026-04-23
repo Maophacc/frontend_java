@@ -108,7 +108,7 @@ const SearchListing = () => {
             setLoading(true);
             setError("");
 
-            const apiPageNumber = page + 1;
+            const apiPageNumber = page;
 
             const data = await GET_PRODUCTS_BY_KEYWORD(
                 q,
@@ -124,7 +124,7 @@ const SearchListing = () => {
             setProducts(list);
             setTotalPages(Number(data?.totalPages ?? 1));
             setTotalElements(Number(data?.totalElements ?? 0));
-            setLastPage(Boolean(data?.lastPage));
+            setLastPage(page >= (data?.totalPages ?? 1) - 1);
 
             // sync page từ server (0-based)
             if (typeof data?.pageNumber === "number") {
